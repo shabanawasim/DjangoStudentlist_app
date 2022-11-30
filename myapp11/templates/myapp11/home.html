@@ -1,0 +1,92 @@
+<Style>
+    th, table, td {
+        border: 1px solid black;
+    }
+    #Login_form {
+    text-transform: uppercase;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    padding: 10px;
+    border: 2px solid rgba(128,128,128,0.17);
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(30, 50, 40, 0.5);
+   }
+   input {
+    margin: 5px 0;
+    padding: 10px;
+    width: 90%;
+    border-radius: 20px;
+    border: 1px solid rgba(128,128,128,0.17);
+  }
+  #btn {
+    font-size: medium;
+    color: #fff;
+    background-color: blue;
+  }
+  input:focus {
+    outline: 0;
+    box-shadow: 5px 5px 5px rgba(30,50,40,0.5);
+  }
+</Style>
+<h1></h1>
+<div style="margin: auto; width: 420px;">
+    <form action="" method="post" id="Login_form">
+        {% csrf_token %}
+        
+        <h1>Student Form</h1>
+        <input type="text" placeholder="Enter Name" name="name" id="name" required="">
+        <input type="text" placeholder="Enter Department" name="dept" id="dept" required="">
+        <input type="email" placeholder="Email" name="email" id="email" required="">
+        <input type="number" placeholder="Enter your Mobile Number" name="num" id="num" required=""> 
+        <input type="address" placeholder="Enter your Address" name="addr" id="addr"></input><br><br>
+        <input type="submit" value="Add Student" id="btn"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+        
+    </form>
+    {% if messages %}
+        {% for message in messages %}
+        <center style="color: blue; margin-top: 10px;"><small {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}} </small></center>
+        {% endfor %}
+        {% endif %}    
+    </div>
+
+    <div>
+        {% if tasks|length == 0 %}
+        <center><div>
+          No deatils  Found...add your deatil!
+        </div></center>
+        {% else %}
+        <div class="mydiv">
+          <div style="text-align: center;">
+              <div style="width: 500px; margin: 0 auto; background:blue; color: #fff;"><h1>Student details</h1></div>
+          </div> 
+        </div>  
+          <center><table style="width: 500px;"> 
+          
+            <thead>
+              <tr>
+                <th>SNO</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Email</th>
+                <th>Mobile No</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+               <tr>
+                  <th>{{forloop.counter}}</th>
+                  <td>{{task.name}}</td>
+                  <td>{{task.Department}}</td>
+                  <td>{{task.Email}}</td>
+                  <td>{{task.MObile}}</td>
+                  <td>{{task.Address}}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+            </table></center>
+      </div>  
+      {% endif %}      
+  
